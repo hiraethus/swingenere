@@ -8,6 +8,12 @@
   <name>swingenere</name>
   <url>http://maven.apache.org</url>
   <dependencies>
+  	<dependency>
+		<groupId>com.clackjones</groupId>
+		<artifactId>vigenere_util</artifactId>
+		<version>1.0-SNAPSHOT</version>	
+  	</dependency>
+  	<!-- unit testing -->
     <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
