@@ -39,6 +39,7 @@ public class SwingenereView implements PropertyChangeListener {
 
 	public SwingenereView(SwingenereController controller) {
 		this.controller = controller;
+		this.controller.registerView(this);
 	}
 
 	private void initGui() {
@@ -163,6 +164,9 @@ public class SwingenereView implements PropertyChangeListener {
 				//dry message value from message area
 				String messageText = messageArea.getText();
 				controller.setMessage(messageText);
+
+				String keyString = keyField.getText();
+				controller.setKey(keyString);
 				controller.encrypt();
 			}
 		});
@@ -173,6 +177,9 @@ public class SwingenereView implements PropertyChangeListener {
 				//dry message value from message area
 				String messageText = messageArea.getText();
 				controller.setMessage(messageText);
+
+				String keyString = keyField.getText();
+				controller.setKey(keyString);
 				controller.decrypt();
 			}
 		});
