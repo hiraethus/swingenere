@@ -4,6 +4,8 @@ import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 
@@ -15,6 +17,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
+import javax.swing.event.DocumentEvent;
 
 public class SwingenereView implements PropertyChangeListener {
 	// TODO: replace with i18n
@@ -148,9 +151,37 @@ public class SwingenereView implements PropertyChangeListener {
 		}
 	}
 
+	/**
+	 * Add listeneres to components so that they can 
+	 * manipulate the model
+	 */
+	private void setupComponents() {
+		encryptButton.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				//dry message value from message area
+				String messageText = messageArea.getText();
+				controller.setMessage(messageText);
+				controller.encrypt();
+			}
+		});
+
+		decryptButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				//dry message value from message area
+				String messageText = messageArea.getText();
+				controller.setMessage(messageText);
+				controller.decrypt();
+			}
+		});
+	}
+
 	public void showAndManageGui() {
 		initGui();
 		populateGui();
+		setupComponents();
 		JFrame frame = new JFrame(FRAME_TITLE);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().add(mainPanel);
@@ -160,6 +191,16 @@ public class SwingenereView implements PropertyChangeListener {
 
 	@Override
 	public void propertyChange(PropertyChangeEvent evt) {
+		if (evt.getPropertyName().equals(SwingenereModel.MESSAGE_CHANGED)) {
+			this.messageArea.setText(evt.getNewValue().toString());
+		}
 
+		if (evt.getPropertyName().equals(SwingenereModel.KEY_CHANGED)) {
+			this.keyField.setText(evt.getNewValue().toString());
+		}
+
+		if (evt.getPropertyName().equals(SwingenereModel.RESULT_CHANGED)) {
+			this.resultArea.setText(evt.getNewValue().toString());
+		}
 	}
 }

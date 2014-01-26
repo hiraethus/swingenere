@@ -77,7 +77,22 @@ public class SwingenereController implements PropertyChangeListener {
 		}
 	}
 
+	public void encrypt() {
+		if (this.model != null) {
+			this.model.encrypt();
+		}
+	}
+
+	public void decrypt() {
+		if (this.model != null) {
+			this.model.decrypt();
+		}
+	}
+
 	public void propertyChange(PropertyChangeEvent evt) {
-		//TODO
+		//tell all the views
+		for (PropertyChangeListener view: views) {
+			view.propertyChange(evt);
+		}
 	}
 }
