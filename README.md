@@ -12,3 +12,13 @@ Then git clone swingenere and call the following command on it:
 ```
 mvn clean package assembly:single
 ```
+
+---
+
+## TODO
+* Add error notification when invalid message or key entered
+* Add i18n support
+* Consider adding cryptanalysis utils
+  * Kasiski examination
+  * Friedman test (etc. see Wikipedia)
+* Consider add visualization of encryption/decryption
