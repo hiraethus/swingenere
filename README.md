@@ -5,9 +5,9 @@ A small Swing application built with maven to give a simple front end to the vig
 ![Swingenere screenshot](screenshot.png "Swingenere v0.1")
 
 ## Installation
-In order to install this application from source, first git clone vigenere_util and do a `mvn clean install` on it to add the jar to your local repository.
+In order to install this application from source, first `git clone https://github.com/hiraethus/vigenere_util` and do a `mvn clean install` on it to add the jar to your local repository.
 
-Then git clone swingenere and call the following command on it:
+Then git clone swingenere (`git clone https://github.com/hiraethus/swingenere`) and call the following command on it:
 
 ```
 mvn clean package assembly:single
