@@ -16,6 +16,7 @@ public class SwingenereModelImpl implements SwingenereModel {
 
 	private VigenereEncrypt vigenereEncrypt = new VigenereEncryptImpl();
 	private String result = "";
+	SystemError systemError = null;
 
 	@Override
 	public String getMessage() {
@@ -28,8 +29,9 @@ public class SwingenereModelImpl implements SwingenereModel {
 		try {
 			vigenereEncrypt.setMessage(message);
 		} catch (InvalidMessageException e) {
-			// TODO add exception handling to view
-			e.printStackTrace();
+			if (e != null) {
+				setSystemError(SystemError.forException(e));
+			}
 		}
 
 		mPcs.firePropertyChange(MESSAGE_CHANGED, oldMessage, message);
@@ -41,8 +43,9 @@ public class SwingenereModelImpl implements SwingenereModel {
 		try {
 			key = vigenereEncrypt.getKeyString();
 		} catch (InvalidKeyException e) {
-			// TODO add exception handling to view
-			e.printStackTrace();
+			if (e != null) {
+				setSystemError(SystemError.forException(e));
+			}
 		}
 		return key;
 	}
@@ -53,15 +56,17 @@ public class SwingenereModelImpl implements SwingenereModel {
 		try {
 			oldKey = vigenereEncrypt.getKeyString();
 		} catch (InvalidKeyException e) {
-			// TODO add exception handling to view
-			e.printStackTrace();
+			if (e != null) {
+				setSystemError(SystemError.forException(e));
+			}
 		}
 
 		try {
 			vigenereEncrypt.setKeyString(key);
 		}catch (InvalidKeyException e) {
-			// TODO add exception handling to view
-			e.printStackTrace();
+			if (e != null) {
+				setSystemError(SystemError.forException(e));
+			}
 		}
 
 		mPcs.firePropertyChange(KEY_CHANGED, oldKey, key);
@@ -85,14 +90,17 @@ public class SwingenereModelImpl implements SwingenereModel {
 		try {
 			newResult = vigenereEncrypt.encrypt();
 		} catch (KeyNotSetException e) {
-			// TODO add exception handling to view
-			e.printStackTrace();
+			if (e != null) {
+				setSystemError(SystemError.forException(e));
+			}
 		} catch (MessageNotSetException e) {
-			// TODO add exception handling to view
-			e.printStackTrace();
+			if (e != null) {
+				setSystemError(SystemError.forException(e));
+			}
 		} catch (InvalidCharacterException e) {
-			// TODO add exception handling to view
-			e.printStackTrace();
+			if (e != null) {
+				setSystemError(SystemError.forException(e));
+			}
 		}
 
 		this.result = newResult;
@@ -107,14 +115,17 @@ public class SwingenereModelImpl implements SwingenereModel {
 		try {
 			newResult = vigenereEncrypt.decrypt();
 		} catch (KeyNotSetException e) {
-			// TODO add exception handling to view
-			e.printStackTrace();
+			if (e != null) {
+				setSystemError(SystemError.forException(e));
+			}
 		} catch (MessageNotSetException e) {
-			// TODO add exception handling to view
-			e.printStackTrace();
+			if (e != null) {
+				setSystemError(SystemError.forException(e));
+			}
 		} catch (InvalidCharacterException e) {
-			// TODO add exception handling to view
-			e.printStackTrace();
+			if (e != null) {
+				setSystemError(SystemError.forException(e));
+			}
 		}
 
 		this.result = newResult;
@@ -129,6 +140,19 @@ public class SwingenereModelImpl implements SwingenereModel {
 	@Override
 	public void removePropertyChangeListener(PropertyChangeListener listener) {
 		mPcs.removePropertyChangeListener(listener);
+	}
+
+	@Override
+	public void setSystemError(SystemError systemError) {
+		SystemError oldSystemError = this.systemError;
+		this.systemError = systemError;
+
+		mPcs.firePropertyChange(ERROR_CHANGED, oldSystemError, this.systemError);
+	}
+
+	@Override
+	public SystemError getSystemError() {
+		return this.systemError;
 	}
 
 }

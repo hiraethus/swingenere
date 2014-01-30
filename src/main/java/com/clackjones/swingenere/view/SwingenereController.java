@@ -77,6 +77,15 @@ public class SwingenereController implements PropertyChangeListener {
 		}
 	}
 
+	public SystemError getSystemError() {
+		SystemError systemError = null;
+		if (this.model != null) {
+			systemError = this.model.getSystemError();
+		}
+
+		return systemError;
+	}
+
 	public void encrypt() {
 		if (this.model != null) {
 			this.model.encrypt();

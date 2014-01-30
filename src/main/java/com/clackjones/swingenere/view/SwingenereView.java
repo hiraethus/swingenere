@@ -12,12 +12,12 @@ import java.beans.PropertyChangeListener;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
-import javax.swing.event.DocumentEvent;
 
 public class SwingenereView implements PropertyChangeListener {
 	// TODO: replace with i18n
@@ -208,6 +208,16 @@ public class SwingenereView implements PropertyChangeListener {
 
 		if (evt.getPropertyName().equals(SwingenereModel.RESULT_CHANGED)) {
 			this.resultArea.setText(evt.getNewValue().toString());
+		}
+
+		if (evt.getPropertyName().equals(SwingenereModel.ERROR_CHANGED)) {
+			showErrorDialog((SystemError) evt.getNewValue());
+		}
+	}
+
+	private void showErrorDialog(SystemError systemError) {
+		if (this.mainPanel != null) {
+			JOptionPane.showMessageDialog(mainPanel, systemError.getErrorMessage());
 		}
 	}
 }
