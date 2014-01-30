@@ -23,3 +23,4 @@ mvn clean package assembly:single
   * Kasiski examination
   * Friedman test (etc. see Wikipedia)
 * Consider add visualization of encryption/decryption
+* Consider doing JavaFX impl
