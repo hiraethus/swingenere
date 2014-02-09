@@ -21,6 +21,7 @@ mvn clean package assembly:single
 * Add i18n support
   * ~~to UI~~
   * to errors
+* Add SLF4J logging
 * Consider adding cryptanalysis utils
   * Kasiski examination
   * Friedman test (etc. see Wikipedia)
