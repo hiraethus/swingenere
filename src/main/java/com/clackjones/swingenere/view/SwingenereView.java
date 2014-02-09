@@ -8,6 +8,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
+import java.util.Locale;
+import java.util.ResourceBundle;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -20,14 +22,6 @@ import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
 public class SwingenereView implements PropertyChangeListener {
-	// TODO: replace with i18n
-	private static final String FRAME_TITLE = "Swingenere v0.1";
-	private static final String MESSAGE = "Message";
-	private static final String KEY_MESSAGE = "Key";
-	private static final String ENCRYPT_BUTTON_TEXT = "Encrypt";
-	private static final String DECRYPT_BUTTON_TEXT = "Decrypt";
-	private static final String RESULT_LABEL_TEST = "Result";
-
 	private JPanel mainPanel;
 	private JTextArea messageArea;
 	private JTextField keyField;
@@ -35,6 +29,7 @@ public class SwingenereView implements PropertyChangeListener {
 	private JButton decryptButton;
 	private JTextArea resultArea;
 
+	private ResourceBundle resourceBundle = ResourceBundleFactory.getResourceBundle();
 	private SwingenereController controller;
 
 	public SwingenereView(SwingenereController controller) {
@@ -56,7 +51,7 @@ public class SwingenereView implements PropertyChangeListener {
 		c.weightx = 1.;
 		c.weighty = 0.;
 
-		JLabel messageLabel = new JLabel(MESSAGE);
+		JLabel messageLabel = new JLabel(resourceBundle.getString("swingenere.messageLbl"));
 		mainPanel.add(messageLabel, c);
 
 		c.anchor = GridBagConstraints.LINE_START;
@@ -78,7 +73,7 @@ public class SwingenereView implements PropertyChangeListener {
 		c.weightx = .1;
 		c.weighty = 0.;
 
-		JLabel keyLabel = new JLabel(KEY_MESSAGE);
+		JLabel keyLabel = new JLabel(resourceBundle.getString("swingenere.keyLbl"));
 		mainPanel.add(keyLabel, c);
 
 		c.anchor = GridBagConstraints.LINE_START;
@@ -100,7 +95,7 @@ public class SwingenereView implements PropertyChangeListener {
 		c.weightx = 0.;
 		c.weighty = 0.;
 
-		encryptButton = new JButton(ENCRYPT_BUTTON_TEXT);
+		encryptButton = new JButton(resourceBundle.getString("swingenere.encryptBtn"));
 		mainPanel.add(encryptButton, c);
 
 		c.anchor = GridBagConstraints.LINE_START;
@@ -111,7 +106,7 @@ public class SwingenereView implements PropertyChangeListener {
 		c.weightx = 0.;
 		c.weighty = 0.;
 
-		decryptButton = new JButton(DECRYPT_BUTTON_TEXT);
+		decryptButton = new JButton(resourceBundle.getString("swingenere.decryptBtn"));
 		mainPanel.add(decryptButton, c);
 
 		c.anchor = GridBagConstraints.LINE_START;
@@ -122,7 +117,7 @@ public class SwingenereView implements PropertyChangeListener {
 		c.weightx = 1.;
 		c.weighty = 0.;
 
-		JLabel resultLbl = new JLabel(RESULT_LABEL_TEST);
+		JLabel resultLbl = new JLabel(resourceBundle.getString("swingenere.resultLbl"));
 		mainPanel.add(resultLbl, c);
 
 		c.anchor = GridBagConstraints.LINE_START;
@@ -189,7 +184,7 @@ public class SwingenereView implements PropertyChangeListener {
 		initGui();
 		populateGui();
 		setupComponents();
-		JFrame frame = new JFrame(FRAME_TITLE);
+		JFrame frame = new JFrame(resourceBundle.getString("swingenere.title"));
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().add(mainPanel);
 		frame.setSize(new Dimension(400, 500));
