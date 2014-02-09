@@ -19,6 +19,8 @@ mvn clean package assembly:single
 * ~~Add error notification when invalid message or key entered~~
   * Add meaningful messages to be internationalized
 * Add i18n support
+  * ~~to UI~~
+  * to errors
 * Consider adding cryptanalysis utils
   * Kasiski examination
   * Friedman test (etc. see Wikipedia)
