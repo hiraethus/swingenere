@@ -6,6 +6,7 @@ import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.util.Locale;
@@ -14,6 +15,9 @@ import java.util.ResourceBundle;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -29,8 +33,11 @@ public class SwingenereView implements PropertyChangeListener {
 	private JButton decryptButton;
 	private JTextArea resultArea;
 
+	private JMenuBar menuBar;
+
 	private ResourceBundle resourceBundle = ResourceBundleFactory.getResourceBundle();
 	private SwingenereController controller;
+	private JMenuItem exitMenuItem;
 
 	public SwingenereView(SwingenereController controller) {
 		this.controller = controller;
@@ -38,6 +45,8 @@ public class SwingenereView implements PropertyChangeListener {
 	}
 
 	private void initGui() {
+		initMenuBar();
+
 		mainPanel = new JPanel();
 		mainPanel.setLayout(new GridBagLayout());
 		mainPanel.setPreferredSize(new Dimension(200, 200));
@@ -147,6 +156,25 @@ public class SwingenereView implements PropertyChangeListener {
 		}
 	}
 
+	public JMenuBar initMenuBar() {
+		menuBar = new JMenuBar();
+
+		JMenu fileMenu = new JMenu("File");
+		fileMenu.setMnemonic(KeyEvent.VK_F);
+
+		exitMenuItem = new JMenuItem("Exit");
+		exitMenuItem.setMnemonic(KeyEvent.VK_X);
+		fileMenu.add(exitMenuItem);
+
+		menuBar.add(fileMenu);
+
+		JMenu helpMenu = new JMenu("Help");
+		helpMenu.setMnemonic(KeyEvent.VK_H);
+		menuBar.add(helpMenu);
+
+		return menuBar;
+	}
+
 	/**
 	 * Add listeneres to components so that they can 
 	 * manipulate the model
@@ -178,6 +206,14 @@ public class SwingenereView implements PropertyChangeListener {
 				controller.decrypt();
 			}
 		});
+
+		exitMenuItem.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				System.exit(0);
+			}
+		});
 	}
 
 	public void showAndManageGui() {
@@ -187,6 +223,7 @@ public class SwingenereView implements PropertyChangeListener {
 		JFrame frame = new JFrame(resourceBundle.getString("swingenere.title"));
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().add(mainPanel);
+		frame.setJMenuBar(menuBar);
 		frame.setSize(new Dimension(400, 500));
 		frame.setVisible(true);
 	}
