@@ -27,3 +27,4 @@ mvn clean package assembly:single
   * Friedman test (etc. see Wikipedia)
 * Consider add visualisation of encryption/decryption
 * Consider doing JavaFX impl
+* Ensure threading used
