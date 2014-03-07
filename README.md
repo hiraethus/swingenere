@@ -17,7 +17,7 @@ mvn clean package assembly:single
 
 ## TODO
 * ~~Add error notification when invalid message or key entered~~
-  * Add meaningful messages to be internationalized
+  * Add meaningful messages to be internationalised
 * Add i18n support
   * ~~to UI~~
   * to errors
@@ -25,5 +25,5 @@ mvn clean package assembly:single
 * Consider adding cryptanalysis utils
   * Kasiski examination
   * Friedman test (etc. see Wikipedia)
-* Consider add visualization of encryption/decryption
+* Consider add visualisation of encryption/decryption
 * Consider doing JavaFX impl
